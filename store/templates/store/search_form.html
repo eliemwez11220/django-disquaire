@@ -1,0 +1,11 @@
+<div class="bg-dark container-fluid text-white d-flex align-items-center justify-content-center">
+  <form style="max-width: 600px;" action="{% url 'store:search' %}" method="get" accept-charset="utf-8">
+    <label for="searchForm">Chercher un disque</label>
+    <div class="input-group" >
+        <input type="text" id="searchForm" name="query" class="text-white form-control bg-transparent border-light p-3"
+            placeholder="Type search keyword">
+        <button class="btn btn-light px-4"><i class="bi bi-search"></i></button>
+    </div>
+    <span class="help-block" id="helpBlock">Trouvez le CD de vos rêves en tapant son titre ou le nom d'un des artistes.</span>
+  </form>
+</div>

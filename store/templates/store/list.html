@@ -1,0 +1,87 @@
+<!-- Hero Start -->
+
+ <!-- Service Start<div class="col-lg-12">
+    <hr>
+    <h2 class="intro-text text-center">{{ list_title }}
+    </h2>
+    <hr class="detail-separator">
+</div>
+
+{% include 'store/search_form.html' %}
+ -->
+{% if albums|length_is:"0" %}
+    <div class="text-center container-fluid fw-bold alert alert-warning">
+      Palsambleu ! Nous n'avons trouvé aucun résultat à cette requête. 
+      Même pas de quoi se ronger la chique !
+      Partez de nouveau à l'abordage !
+    </div>
+
+{% else %}
+ <!-- Service Start -->
+ <div class="container-fluid bg-light mt-5 py-5">
+  <div class="container py-5">
+      <div class="row g-5 align-items-center">
+          <div class="col-lg-12 wow fadeIn text-center" data-wow-delay="0.1s">
+              <h2 class="mb-4">Our Excellent AI Solutions for Your Business</h2>
+              <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
+                  amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
+                  clita duo justo et tempor eirmod magna dolore erat amet</p>
+              <a class="btn btn-primary rounded-pill px-4" href="">Read More</a>
+          </div>
+          <div class="col-lg-12">
+              <div class="row g-4">
+                  {% for album in albums %}
+                      <div class="col-md-6 col-lg-4 col-sm-12">
+                          <div class="row g-4">
+                              <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
+                                  <div class="shadow-lg service-item d-flex flex-column justify-content-center text-center rounded">
+                                      <div class="service-icon btn-square">
+                                          <i class="fas fa-users fa-2x"></i>
+                                      </div>
+                                      <h5 class="mb-3">{{ album.title }}</h5>
+                                        <!-- {% for artist in album.artists.all %}
+                                            <p>{{ artist.name }}</p>
+                                            {% endfor %}  -->
+                                      <a class="btn px-3 mt-auto mx-auto" href="{% url 'store:detail' album_id=album.id %}">Read More</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  {% endfor %}
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Service End 
+    {% for album in albums %}
+        <div class="col-sm-4 text-center">
+            <a href="{% url 'store:detail' album_id=album.id %}">
+              <img class="img-responsive" src="{{ album.picture }}" alt="{{ album.title }}">
+            </a>
+            <h3><a href="{% url 'store:detail' album_id=album.id %}">{{ album.title }}</a></h3>
+            {% for artist in album.artists.all %}
+                <p>{{ artist.name }}</p>
+            {% endfor %}
+        </div>
+        {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+    {% endfor %}
+-->
+{% endif %}
+{% if paginate %}
+    <div class="container">
+        <div class="clearfix text-center">
+            <nav aria-label="">
+                <ul class="pager">
+                    {% if albums.has_previous %}
+                        <li><a class="btn btn-primary px-4" href="?page={{ albums.previous_page_number }}">Précédent</a></li>
+                    {% endif %}
+                    {% if albums.has_next %}
+                        <li><a class="btn btn-primary px-4" href="?page={{ albums.next_page_number }}">Suivant</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endif %}

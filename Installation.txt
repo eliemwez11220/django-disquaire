@@ -1,0 +1,78 @@
+1. =========== Verification Installation et version =============
+= python3 -m django --version
+
+2. =========Creation d'un projet django ==========================
+= django-admin startproject nom_du_projet 
+
+3. ============== Installation PostgreSQL ========================
+3.1 = sudo apt install postgresql
+3.2 = sudo service postgresql start OR sudo service postgresql restart
+3.3 = sudo systemctl status postgresql
+3.4 = All In One
+sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql
+
+============ CHANGE DEFAULT PASSWORD ================
+1. entrer dans la console: sudo -u postgres psql
+2. changer password: \password postgres
+
+============ DATABASE AND USERS manage =============
+
+CREATE USER disquaires WITH PASSWORD 'p*04991*p' CREATEDB;
+CREATE DATABASE disquairesdb WITH OWNER disquaires;
+ALTER DATABASE disquairesdb OWNER TO disquaires;
+GRANT ALL PRIVILEGES ON DATABASE disquairesdb TO disquaires;
+
+========= ACCESS TO DATABASE
+psql database_name E.g: psql disquairesdb
+\dt: commande pour lister les tables d'une base de donnees
+\d table_name: commande pour lister les colonnes d'une table
+
+============ RUN SERVER ====================
+POUR EXECUTER LE PROJET 
+./manage.py runserver
+====== MIGRATION - CLASSES ==========================
+POUR GENERER DES MIGRATIONS
+./manage.py makemigrations
+====== MIGRATION TABLES ==========================
+POUR CREER DES TABLES A PARTIR DES MIGRATIONS
+./manage.py migrate
+
+=========== DESCRIPTION DES FICHIERS ===========
+1. __init__.py : GERE LES MODULES 
+2. settings.py: gere les parametres generaux du projet 
+3. urls.py : gere les routes de l'application 
+4. wsgi.py: Reglage du serveur Web
+
+=============== DEBUGBAR TOOLS ============
+CMD: pip install django-debug-toolbar
+
+============== CREATE NEW DJANGO APP ==============
+1. CMD: django-admin startapp nom_app_full
+2. Configuration:
+    - Add to settings apps array: nom_app_full.apps.NomAppFullConfig
+
+============DONNEES =========================
+Insertion des donnees a partir de la console Django 
+
+import nom_du_modele from nom_model 
+
+//Insertion
+nom_model.objects.create(champ1 = "valeur1", champ2 = "valeur2")
+
+//visualisation 
+nom_model.objects.all()
+
+//filtre 
+nom_model.objects.filter(champ1 = "valeur1")
+
+=============== Production Instructions =======================
+Les librairies a rajouter 
+1. pip install whitenoise = permet de creer des fichiers statiques 
+2. pip install dj_database_url = permet de gerer les urls vers la base de donnees 
+3. pip install gunicorn 
+4. ./manage.py dumpdata > store/dumps/store.json = importation de la base de donnees 
+5. pip freeze > requirements.txt = permet de generer toutes les Configurations
+
