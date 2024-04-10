@@ -2,7 +2,7 @@ from django.db import models
 
 class Artist(models.Model):
     name = models.CharField('nom', max_length=200, unique=True)
-
+    avatar = models.TextField("URL Photo profil", null=True)
     class Meta:
         verbose_name = "artiste"
 

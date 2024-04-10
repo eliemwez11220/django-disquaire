@@ -28,9 +28,10 @@ SECRET_KEY = 'django-insecure-^nc)v(sf9%o%ux@drl*2&nlf6=699bpf%zg#er4awdww+q5qje
 
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
+    ALLOWED_HOSTS = ['django.ditotase.com/disquaires/']
 else:
     DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -87,15 +88,18 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'disquairesdb',
-        'USER': 'disquaires',
+        #'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'django_db',
+        'USER': 'django_dba',
         'PASSWORD': 'p*04991*p',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset':'utf8'
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -120,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'fr'
 
-TIME_ZONE = 'Africa/Kinshasa'
+TIME_ZONE = 'Africa/Lubumbashi'
 
 USE_I18N = True
 

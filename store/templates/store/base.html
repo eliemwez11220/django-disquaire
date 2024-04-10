@@ -10,7 +10,7 @@
 
     {% load static %}
     <!-- Favicon -->
-    <link href="{% static 'store/img/favicon.ico' %}" rel="icon">
+    <link href="{% static 'store/img/rubuz.png' %}" rel="icon">
 
     <!-- Icon Font Stylesheet -->
     <link href="{% static 'store/lib/fontawesome/css/all.min.css' %}" rel="stylesheet">
@@ -35,16 +35,27 @@
                 <a href="" class="navbar-brand">
                     <h1 class="text-white">Trecaz<span class="text-dark">.</span>Disquaire</h1>
                 </a>
-                <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
+                <!--
+                <button type="button" class="mobile-menu-btn navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
                     data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+            -->
+            <button class="navbar-toggler mobile-menu-btn text-white" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="/" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'store:listing' %}" class="nav-item nav-link">Albums</a>
-                        <a href="{% url 'store:listing' %}" class="nav-item nav-link">Artistes</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="{% url 'store:artists' %}" class="nav-item nav-link">Artistes</a>
+                       
+                        <a href="{% url 'store:about' %}" class="nav-item nav-link">About Us</a>
+                        <a href="{% url 'store:contact' %}" class="nav-item nav-link">Contact Us</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light mt-2">
@@ -55,7 +66,7 @@
                                 <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
-                        <a href="/webadmin/" class="nav-item nav-link">Contact</a>
+                        
                     </div>
                     <butaton type="button" class="btn text-white p-0 d-none d-lg-block" data-bs-toggle="modal"
                         data-bs-target="#searchModal"><i class="fa fa-search"></i></butaton>

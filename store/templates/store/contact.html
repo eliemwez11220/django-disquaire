@@ -1,0 +1,147 @@
+{% extends 'store/base.html' %}
+{% block content %}
+    <!-- Feature Start -->
+    <!-- Hero Start -->
+    <div class="container-fluid pt-5 bg-primary hero-header">
+        <div class="container pt-5">
+            <div class="row g-5 pt-5">
+                <div class="col-lg-8 align-self-center text-center text-lg-start mb-lg-5">
+                    <h1 class="display-4 text-white mb-4 animated slideInRight">Nous contacter</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center justify-content-lg-start mb-0">
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Album</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Informations</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-4 align-self-middle  text-center text-lg-end">
+                    <a class="btn btn-light rounded-pill px-4" href="{% url 'store:listing' %}">Explorer tous les disques</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if body %}
+            
+        <!-- Contact Start -->
+        <div class="container-fluid py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">{{ title }}</div>
+                    <h1 class="mb-4">Congratulations</h1>
+                    <p class="mb-4">{{ body }}</p>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                        <div class="wow fadeIn" data-wow-delay="0.3s">
+                            <form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                            <label for="name">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                            <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <label for="subject">Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <label for="message">Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+    {% else %}
+        <!-- Hero End -->
+        <div class="container-fluid bg-dark feature pt-5">
+        <div class="container pt-5">
+            <div class="row g-5">
+                <div class="col-lg-6 align-self-center mb-md-5 pb-md-5 wow fadeIn" data-wow-delay="0.3s">
+                    <div class="row g-4 pt-3">
+                        <div class="col-sm-6">
+                            <div class="d-flex rounded p-3" style="background: rgba(256, 256, 256, 0.1);">
+                                <i class="fa fa-users fa-3x text-white"></i>
+                                <div class="ms-3">
+                                    <h2 class="text-white mb-0" data-toggle="counter-up">9999</h2>
+                                    <p class="text-white mb-0">Happy Clients</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex rounded p-3" style="background: rgba(256, 256, 256, 0.1);">
+                                <i class="fa fa-check fa-3x text-white"></i>
+                                <div class="ms-3">
+                                    <h2 class="text-white mb-0" data-toggle="counter-up">9999</h2>
+                                    <p class="text-white mb-0">Listners</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <h2 class="text-center artist_name"> formulaire de contact</h2>
+                            <p style="margin-bottom: 20px;">Demandez-nous de mettre de côté l'album  et venez le chercher dès demain en magasin ! </p>
+                            <form class="form-inline" action="{% url 'store:contact' %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-floating mb-3 {% if form.name.errors %}has-warning has-feedback{% endif %}">
+                                    <!-- <input type="text" name="name" value="" id="name"> -->
+                                    {{ form.name }}
+                                    <label for="{{ form.name.id_for_label }}" class="control-label">Nom</label>
+                                
+                                </div>
+                                <div class="form-floating mb-3 {% if form.email.errors %}has-warning has-feedback{% endif %}">
+                                    <!-- <input type="text" name="email" value="" id="email"> -->
+                                    {{ form.email }}
+                                    <label for="{{ form.email.id_for_label }}" class="control-label">E-mail</label>
+                                
+                                </div>
+                                {% if errors %}
+                                <div>
+                                {% for key, error in errors %}
+                                {% autoescape off %}
+                                    {{ error }}
+                                {% endautoescape %}
+                                {% endfor %}
+                                </div>
+                                {% endif %}
+                                <!-- <input type="hidden" class="hidden" value="{{ album.id }}" name="album_id"> -->
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success rounded-5 btn-lg">
+                                        Envoyer message
+                                    </button>
+                                    
+                                </div>
+                            </form>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        </div>
+    <!-- Feature End -->
+    {% endif %}
+  {% include "store/footer.html" %}
+{% endblock %}
